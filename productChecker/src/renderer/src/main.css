@@ -1,0 +1,41 @@
+* {
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fefefe;
+}
+
+a {
+    font-weight: 600;
+    color: #9AD421;
+    text-decoration: none;
+}
+
+button {
+  background: #9AD421;
+  border-radius: 12px;
+  box-shadow: #9AD422 0 11px 22px -11px;
+  box-sizing: border-box;
+  color: #fefefe;
+  cursor: pointer;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 20px 42px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  margin: 4px 6px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+button a {
+    color: #fefefe;
+}

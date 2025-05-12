@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 body {
@@ -38,4 +39,22 @@ button {
 
 button a {
     color: #fefefe;
+}
+
+form {
+    border: 1px gray;
+}
+
+input {
+    padding: 3px;
+    margin: 5px;
+    border: transparent solid 3px;
+    outline: none;
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+    padding: 10px;
+}
+
+input:focus {
+    border: #9AD421 solid 3px;
 }

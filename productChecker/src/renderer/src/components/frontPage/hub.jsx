@@ -5,8 +5,8 @@ function Hub() {
     return(
         <>
             <img src={logo} alt="Mazon-Logo" className="mazonLogo" /> <br />
-            <button><a href="">Panel Administratora</a></button>
-            <button><a href="">Panel Menadżera</a></button>
+            <a href="/admin-login"><button>Panel Administratora</button></a>
+            <a href="/warehouseman-login"><button>Panel Menadżera</button></a>
         </>
     )
 } export default Hub

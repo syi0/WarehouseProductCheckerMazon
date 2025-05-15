@@ -1,0 +1,16 @@
+.form {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.mazonLogo {
+    height: 130px;
+    width: 482px;
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+
+.backLink {
+    margin-top: 20px;
+}

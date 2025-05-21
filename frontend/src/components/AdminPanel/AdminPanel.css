@@ -1,0 +1,14 @@
+.panel {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.tittle {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.logout-button {
+    margin-bottom: 50px;
+}

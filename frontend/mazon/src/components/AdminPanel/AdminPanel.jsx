@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ProductPanel from "../ProductPanel/ProductPanel";
 import './AdminPanel.css'
 import LowStockAlert from "../LowStockAlert/LowStockAlert";
+import ProductAdministration from "../ProductAdministration/ProductAdministration";
 
 function AdminPanel() {
     const navigate = useNavigate(); 
@@ -16,11 +17,10 @@ function AdminPanel() {
         <>
         <section className="panel">
             <h1 className="header">Panel Administratora</h1>
-            <ProductPanel showPrice={true}/> <br />
-
+            <ProductAdministration canEditPrice={true}/>
             <LowStockAlert/> <br />
             
-            <button onClick={handleLogout} className="logout-button">Wyloguj się</button>
+            <button onClick={handleLogout} className="button" id="logout-button">Wyloguj się</button>
         </section>
             
         </>

@@ -1,0 +1,70 @@
+.productAdmin {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+.addForm {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.addForm input {
+    padding: 8px;
+    flex: 1 1 200px;
+}
+
+.productList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+}
+
+.productCard {
+    background: #f3f3f3;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.productCard label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.productCard input {
+    padding: 5px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.deleteBtn {
+    margin-top: 10px;
+    background: #d42121;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.saveBtn {
+    margin-top: 10px;
+    background: #9AD421;
+    box-shadow: #9AD422 0 11px 22px -11px;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+}

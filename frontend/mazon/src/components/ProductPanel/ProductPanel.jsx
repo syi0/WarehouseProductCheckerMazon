@@ -47,7 +47,6 @@ function ProductManager({ showPrice }) {
     const handleFilterChange = (col, value) => {
         setFilters(prev => {
             const updated = { ...prev, [col]: value };
-            // Usuń filtry z późniejszych kolumn (jeśli użytkownik zmieni wcześniejszy select)
             const colIndex = columns.indexOf(col);
             columns.slice(colIndex + 1).forEach(c => {
                 delete updated[c];
@@ -134,8 +133,8 @@ function ProductManager({ showPrice }) {
                             style={{ width: '100px', marginRight: '5px', fontSize: 'large' }}
                             min={0}
                         />
-                        <button onClick={() => updateQuantity(quantityChange)}>Dodaj</button>
-                        <button onClick={() => updateQuantity(-quantityChange)} style={{ marginLeft: '10px' }}>Usuń</button>
+                        <button onClick={() => updateQuantity(quantityChange)} className="button">Dodaj</button>
+                        <button onClick={() => updateQuantity(-quantityChange)} style={{ marginLeft: '10px' }} className="button">Usuń</button>
                     </div>
                 </div>
             )}

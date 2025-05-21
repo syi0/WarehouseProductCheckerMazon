@@ -16,7 +16,7 @@ a {
     text-decoration: none;
 }
 
-button {
+.button {
   background: #9AD421;
   border-radius: 12px;
   box-shadow: #9AD422 0 11px 22px -11px;
@@ -38,16 +38,16 @@ button {
   transition: 0.3s ease;
 }
 
-button:hover {
+.button:hover {
     padding: 24px 46px;
     margin: 8px 10px;
 }
 
-button:focus {
+.button:focus {
     background: #c4fc4d;
 }
 
-button a {
+.button a {
     color: #fefefe;
 }
 
@@ -71,13 +71,12 @@ input:focus {
 }
 
 select {
-    padding: 3px;
     margin: 5px;
     border: transparent solid 3px;
     outline: none;
     transition: 0.25s;
     padding: 10px;
-    width: 100px;
+    width: auto;
 }
 
 select:hover {

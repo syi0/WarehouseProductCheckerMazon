@@ -51,7 +51,8 @@ app.get('/columns/:table', (req, res) => {
     const table = req.params.table;
     db.query(`SHOW COLUMNS FROM \`${table}\``, (err, result) => {
         if (err) return res.status(500).json({ error: "Błąd pobierania kolumn" });
-        res.json(result.map(col => col.Field).filter(col => col !== 'id' && col !== 'stan_magazynowy' && col !== 'stan_minimalny' && col !== 'cena'));
+        res.json(result.map(col => col.Field).filter(col => col !== 'id'));
+
     });
 });
 
@@ -155,8 +156,56 @@ app.get('/low-stock', (req, res) => {
     });
 });
 
+app.post('/all-products', (req, res) => {
+    const { table } = req.body;
+    if (!table) return res.status(400).json({ error: 'Brak tabeli' });
+    db.query(`SELECT * FROM \`${table}\``, (err, result) => {
+        if (err) return res.status(500).json({ error: "Błąd pobierania produktów" });
+        res.json(result);
+    });
+});
 
+app.post('/add-product', (req, res) => {
+    const { table, data } = req.body;
+    if (!table || !data || typeof data !== 'object') {
+        return res.status(400).json({ error: 'Brak danych lub tabela nieprawidłowa' });
+    }
 
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+
+    const sql = `INSERT INTO \`${table}\` (${keys.map(k => `\`${k}\``).join(',')}) VALUES (${keys.map(() => '?').join(',')})`;
+    db.query(sql, values, (err, result) => {
+        if (err) return res.status(500).json({ error: 'Błąd dodawania produktu' });
+        res.json({ success: true });
+    });
+});
+
+app.post('/edit-product', (req, res) => {
+    const { table, id, updates } = req.body;
+    if (!table || !id || !updates || typeof updates !== 'object') {
+        return res.status(400).json({ error: 'Brak danych do aktualizacji' });
+    }
+
+    const keys = Object.keys(updates);
+    const values = Object.values(updates);
+    const sql = `UPDATE \`${table}\` SET ${keys.map(key => `\`${key}\` = ?`).join(', ')} WHERE id = ?`;
+
+    db.query(sql, [...values, id], (err, result) => {
+        if (err) return res.status(500).json({ error: 'Błąd aktualizacji produktu' });
+        res.json({ success: true });
+    });
+});
+
+app.post('/delete-product', (req, res) => {
+    const { table, id } = req.body;
+    if (!table || !id) return res.status(400).json({ error: 'Brak danych do usunięcia' });
+
+    db.query(`DELETE FROM \`${table}\` WHERE id = ?`, [id], (err, result) => {
+        if (err) return res.status(500).json({ error: 'Błąd usuwania produktu' });
+        res.json({ success: true });
+    });
+});
 
 
 app.listen(8081, ()=>{

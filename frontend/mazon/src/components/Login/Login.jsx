@@ -83,7 +83,7 @@ function Login() {
                     className={errors.password || loginError ? "input-error" : ""}
                 /> <br />
                 <span>{errors.password && <p style={{ color: '#d42121' }}>{errors.password}</p>}</span>
-                <button type="submit" className={loginError ? "button-error" : ""}>Zaloguj</button>
+                <button type="submit" className={loginError ? "button-error" : "button"}>Zaloguj</button>
             </form>
         </section>
     )

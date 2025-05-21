@@ -4,7 +4,7 @@
     justify-content: center;
 }
 
-.tittle {
-    margin-top: 90px;
-    margin-bottom: 80px;
+.header {
+    margin: 30px;
+    padding: 10px;
 }

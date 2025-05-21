@@ -4,9 +4,9 @@
     justify-content: center;
 }
 
-.tittle {
-    margin-top: 20px;
-    margin-bottom: 5px;
+.header {
+    margin: 30px;
+    padding: 10px;
 }
 
 .logout-button {

@@ -97,6 +97,66 @@ app.post('/values', (req, res) => {
 });
 
 
+app.get('/low-stock', (req, res) => {
+    const sql = `
+        SELECT  
+               CONCAT_WS(' ', producent, moc_volt_ah, rodzaj, typ_model) AS opis, 
+               stan_magazynowy, stan_minimalny
+        FROM akumulatory_zasilacze_puszki 
+        WHERE stan_magazynowy <= stan_minimalny
+
+        UNION ALL
+
+        SELECT  
+               CONCAT_WS(' ', model_rodzaj, dlugosc) AS opis, 
+               stan_magazynowy, stan_minimalny
+        FROM hilti 
+        WHERE stan_magazynowy <= stan_minimalny
+
+        UNION ALL
+
+        SELECT  
+               CONCAT_WS(' ', rodzaj, rozmiar_dn_cal, rodzaj_stali) AS opis, 
+               stan_magazynowy, stan_minimalny
+        FROM niedrzewne_hydrauliczne 
+        WHERE stan_magazynowy <= stan_minimalny
+
+        UNION ALL
+
+        SELECT 
+               CONCAT_WS(' ', rodzaj, typ_model, nr_katalogowy) AS opis, 
+               stan_magazynowy, stan_minimalny
+        FROM ssp 
+        WHERE stan_magazynowy <= stan_minimalny
+
+        UNION ALL
+
+        SELECT 
+               CONCAT_WS(' ', producent, rodzaj_typ, wyjscie_cal, rozmiar_dn_cal_mm) AS opis, 
+               stan_magazynowy, stan_minimalny
+        FROM tryskaczowka_czerwone 
+        WHERE stan_magazynowy <= stan_minimalny
+
+        UNION ALL
+
+        SELECT 
+               CONCAT_WS(' ', producent, rodzaj, typ_model) AS opis, 
+               stan_magazynowy, stan_minimalny
+        FROM zasysanie_oddymianie 
+        WHERE stan_magazynowy <= stan_minimalny;
+    `;
+
+    db.query(sql, (err, rows) => {
+        if (err) {
+            console.error("Błąd zapytania:", err);
+            return res.status(500).json({ error: "Błąd pobierania produktów" });
+        }
+        res.json(rows);
+    });
+});
+
+
+
 
 
 app.listen(8081, ()=>{

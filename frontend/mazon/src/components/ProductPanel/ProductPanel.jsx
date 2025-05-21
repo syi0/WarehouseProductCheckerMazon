@@ -64,17 +64,26 @@ function ProductManager({ showPrice }) {
     };
 
     const updateQuantity = (delta) => {
-        axios.post('http://localhost:8081/update-quantity', {
-            table: selectedTable,
-            id: product.id,
-            quantityChange: delta
-        }).then(() => {
-            setProduct(prev => ({
-                ...prev,
-                stan_magazynowy: prev.stan_magazynowy + delta
-            }));
-        });
-    };
+    const newQuantity = product.stan_magazynowy + delta;
+
+    if (newQuantity < 0) {
+        alert("Nie można usunąć więcej niż wynosi stan magazynowy.");
+        return;
+    }
+
+    axios.post('http://localhost:8081/update-quantity', {
+        table: selectedTable,
+        id: product.id,
+        quantityChange: delta
+    }).then(() => {
+        setProduct(prev => ({
+            ...prev,
+            stan_magazynowy: newQuantity
+        }));
+        setQuantityChange(0);
+    });
+};
+
 
     const renderDynamicSelects = () => {
         const selects = [];
@@ -123,6 +132,7 @@ function ProductManager({ showPrice }) {
                             value={quantityChange}
                             onChange={e => setQuantityChange(parseInt(e.target.value) || 0)}
                             style={{ width: '100px', marginRight: '5px', fontSize: 'large' }}
+                            min={0}
                         />
                         <button onClick={() => updateQuantity(quantityChange)}>Dodaj</button>
                         <button onClick={() => updateQuantity(-quantityChange)} style={{ marginLeft: '10px' }}>Usuń</button>

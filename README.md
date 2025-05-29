@@ -43,4 +43,19 @@ npm update -g
 npm run dev (skrypt rozpoczynający pracę frontendu)
 ```
 
+### Dodawanie i usuwanie użytkowników:
+Wpisanie odpowiedniej komendy w zależoności od danej akcji będzie przeprowadzało użytkownika przez bardzo prosty formularz wpisywania danych w konsoli
+
+Dodawanie 
+```
+cd backend
+node addUser.js
+```
+
+Usuwanie
+```
+cd backend
+node deleteUser.js
+```
+
 #### Autorzy: Nataniel Sypko (lider), Wiktoria Kruk, Cyprian Głowacki.

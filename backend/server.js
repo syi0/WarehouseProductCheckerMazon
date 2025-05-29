@@ -138,11 +138,35 @@ app.post('/add-product', (req, res) => {
     const { table, data, username } = req.body;
     const keys = Object.keys(data);
     const values = Object.values(data);
+
     const sql = `INSERT INTO ${table} (${keys.join(',')}) VALUES (${keys.map(() => '?').join(',')})`;
     db.run(sql, values, function (err) {
         if (err) return res.status(500).json({ error: 'Błąd dodawania produktu' });
-        logAction(username, `Dodał produkt do tabeli ${table}: ${JSON.stringify(data)}`);
-        res.json({ success: true });
+
+        const insertedRowId = this.lastID;
+
+        const checkIdSql = `SELECT id FROM ${table} WHERE rowid = ?`;
+        db.get(checkIdSql, [insertedRowId], (err2, row) => {
+            if (err2) return res.status(500).json({ error: 'Błąd sprawdzania id' });
+
+            if (!row || row.id == null) {
+                // Pobierz największe istniejące ID
+                db.get(`SELECT MAX(id) as maxId FROM ${table}`, [], (err3, maxResult) => {
+                    if (err3) return res.status(500).json({ error: 'Błąd pobierania max id' });
+
+                    const newId = (maxResult?.maxId || 0) + 1;
+                    db.run(`UPDATE ${table} SET id = ? WHERE rowid = ?`, [newId, insertedRowId], (err4) => {
+                        if (err4) return res.status(500).json({ error: 'Błąd przypisywania id' });
+
+                        logAction(username, `Dodał produkt (id: ${newId}) do tabeli ${table}: ${JSON.stringify(data)}`);
+                        res.json({ success: true, assignedId: newId });
+                    });
+                });
+            } else {
+                logAction(username, `Dodał produkt (id: ${row.id}) do tabeli ${table}: ${JSON.stringify(data)}`);
+                res.json({ success: true, assignedId: row.id });
+            }
+        });
     });
 });
 

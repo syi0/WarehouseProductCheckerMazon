@@ -151,18 +151,37 @@ function ProductAdministration({ canEditPrice }) {
         });
     };
 
-    const handleDelete = (id) => {
-        const confirmDelete = window.confirm("Czy na pewno chcesz usunąć ten produkt?");
-        if (!confirmDelete) return;
+    const handleDelete = async (table, id) => {
+        const username = localStorage.getItem('username'); 
 
-        axios.post('http://localhost:8081/delete-product', {
-            table: selectedTable,
-            id
-        }).then(() => {
-            fetchProducts();
-            alert("Produkt został usunięty.");
-        });
+        console.log("Kliknięto usuń:", table, id, username);
+
+        const confirmed = window.confirm("Czy na pewno chcesz usunąć ten produkt?");
+        if (!confirmed) return;
+
+        try {
+            const res = await fetch('http://localhost:8081/delete-product', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ table, id, username }),
+            });
+
+            const data = await res.json();
+            console.log("Odpowiedź backendu:", data);
+
+            if (data.success) {
+                alert("Produkt został usunięty.");
+                fetchProducts(); 
+            } else {
+                alert("Błąd usuwania: " + data.error);
+            }
+        } catch (err) {
+            console.error("Błąd żądania:", err);
+        }
     };
+
 
     const handleAdvancedFilterChange = (key, value) => {
         setAdvancedFilters(prev => ({ ...prev, [key]: value }));
@@ -290,7 +309,8 @@ function ProductAdministration({ canEditPrice }) {
                                     })}
                                     <td>
                                         <button onClick={() => handleSaveEdit(product.id)} className="saveBtn">Zapisz</button>
-                                        <button onClick={() => handleDelete(product.id)} className="deleteBtn">Usuń</button>
+                                        <button onClick={() => handleDelete(selectedTable, product.id)} className="deleteBtn">Usuń</button>
+
                                     </td>
                                 </tr>
                             ))}

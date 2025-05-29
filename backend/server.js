@@ -150,7 +150,6 @@ app.post('/add-product', (req, res) => {
             if (err2) return res.status(500).json({ error: 'Błąd sprawdzania id' });
 
             if (!row || row.id == null) {
-                // Pobierz największe istniejące ID
                 db.get(`SELECT MAX(id) as maxId FROM ${table}`, [], (err3, maxResult) => {
                     if (err3) return res.status(500).json({ error: 'Błąd pobierania max id' });
 

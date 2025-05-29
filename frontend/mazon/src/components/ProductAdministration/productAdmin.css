@@ -1,0 +1,121 @@
+.productAdmin {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.productAdmin h2 {
+  margin-bottom: 15px;
+}
+
+select, input {
+  margin: 5px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  padding: 8px 12px;
+  margin: 5px;
+  background-color: #9AD421;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #9AD422;
+}
+
+.addForm {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.productTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.productTable th, .productTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.productTable th {
+  background-color: #f2f2f2;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.saveBtn {
+  background-color: #28a745;
+}
+
+.saveBtn:hover {
+  background-color: #1e7e34;
+}
+
+.deleteBtn {
+  background-color: #dc3545;
+}
+
+.deleteBtn:hover {
+  background-color: #a71d2a;
+}
+
+.searchBar {
+  margin-top: 30px;
+}
+
+.searchBar input {
+  width: 300px;
+}
+
+.searchResults {
+  margin-top: 20px;
+}
+
+.searchResults table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.searchResults th, .searchResults td {
+  border: 1px solid #ccc;
+  padding: 6px;
+}
+
+.searchResults th {
+  background-color: #e0e0e0;
+}
+
+
+.deleteBtn {
+    margin-top: 10px;
+    background: #d42121;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.saveBtn {
+    margin-top: 10px;
+    background: #9AD421;
+    box-shadow: #9AD422 0 11px 22px -11px;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 5px;
+}
